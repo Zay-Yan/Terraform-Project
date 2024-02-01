@@ -1,6 +1,6 @@
 <h1>Apache Webserver Deployment with Terraform on AWS</h1>
 
-![CHEESE](Diagram/Apaches.jpg)
+![CHEESE](Diagram/Apaches.jpeg)
 
 
 <h2>Goal</h2>
