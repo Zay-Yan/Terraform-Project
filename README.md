@@ -33,7 +33,7 @@
   </li>
 
   <li>
-    <strong>Create Launch Template:</strong> Use a userdata script to pull the <code>user-data.sh</code> file from S3. Attach IAM role, and <code>user-data.sh</code> will configure the webserver.
+    <strong>Create Launch Template:</strong> Create the AMI image that include all the prerequiste for the webserver (Apache, Nginx).
   </li>
 
   <li>
