@@ -198,43 +198,6 @@ resource "aws_eks_cluster" "eks-cluster" {
 }
 
 
-# Launch Template for EKS node group
-
-resource "aws_launch_template" "eks-cluster_ng_launch_template" {
-
-  name = "EKS_launch_template"
-
-  vpc_security_group_ids = [
-    aws_security_group.eks-ng-sg.id
-  ]
-
-
-  block_device_mappings {
-    device_name = "/dev/xvda"
-
-    ebs {
-      volume_size         = 30
-      volume_type         = "gp3"
-      iops                = 3000
-      throughput          = 300
-    }
-  }
-
-  image_id      = "ami-0123c9b6bfb7eb962"
-  instance_type = "t3.medium"
-    user_data = base64encode(<<-EOF
-MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
---==MYBOUNDARY==
-Content-Type: text/x-shellscript; charset="us-ascii"
-#!/bin/bash
-/etc/eks/bootstrap.sh lab-eks-cluster
-
---==MYBOUNDARY==--\
-  EOF
-  )
-
-}
 
 # EKS Node Group
 
