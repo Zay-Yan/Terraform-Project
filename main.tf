@@ -222,7 +222,18 @@ resource "aws_launch_template" "eks-cluster_ng_launch_template" {
 
   image_id      = "ami-0123c9b6bfb7eb962"
   instance_type = "t3.medium"
-  
+    user_data = base64encode(<<-EOF
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
+--==MYBOUNDARY==
+Content-Type: text/x-shellscript; charset="us-ascii"
+#!/bin/bash
+/etc/eks/bootstrap.sh lab-eks-cluster
+
+--==MYBOUNDARY==--\
+  EOF
+  )
+
 }
 
 # EKS Node Group
