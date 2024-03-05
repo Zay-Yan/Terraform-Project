@@ -249,12 +249,10 @@ resource "aws_eks_node_group" "eks-cluster-ng" {
     max_size     = 2
     min_size     = 2
   }
-
-  launch_template {
-   name = aws_launch_template.eks-cluster_ng_launch_template.name
-   version = aws_launch_template.eks-cluster_ng_launch_template.latest_version
-  }
-
+  ami_type       = "AL2_x86_64"
+  instance_types = ["t2.medium"]
+  capacity_type  = "ON_DEMAND"
+  disk_size      = 20
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
   depends_on = [
