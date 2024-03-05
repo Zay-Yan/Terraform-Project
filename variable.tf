@@ -58,3 +58,6 @@ variable "security_group_rules" {
     },
   ]
 }
+variable "cluster_name" {
+  default = "eks-cluster"
+}
