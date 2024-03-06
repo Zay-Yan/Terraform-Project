@@ -258,7 +258,7 @@ module "eks_blueprints_addons" {
   
 
   eks_addons = {
-  /*
+  
     aws-ebs-csi-driver = {
       most_recent = true
     }
@@ -266,8 +266,8 @@ module "eks_blueprints_addons" {
       most_recent = true
     }
   
-  */
   
+  /*
     // do this first
     vpc-cni = {
       most_recent = true
@@ -275,6 +275,7 @@ module "eks_blueprints_addons" {
     kube-proxy = {
       most_recent = true
     }
+    */
   }
   
   // enable_aws_load_balancer_controller = true
