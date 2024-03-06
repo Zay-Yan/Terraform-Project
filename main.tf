@@ -236,7 +236,7 @@ resource "aws_eks_node_group" "eks-cluster-ng" {
 resource "aws_security_group" "eks-alb-sg" {
   name        = "eks-alb-sg"
   description = "Security group for application load balancer"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     description = "Allow http user traffic"
@@ -274,7 +274,7 @@ resource "aws_lb" "eks-alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.eks-alb-sg.id]
-  subnets            = var.alb_subnets
+  subnets            = aws_subnet.public-subnet[*].id
   enable_deletion_protection = false
   depends_on = [var.vpc-igw]
 }
@@ -286,7 +286,7 @@ resource "aws_lb_target_group" "lab-alb-tg" {
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"  // instance 
-  vpc_id      = var.vpc_id
+  vpc_id      = aws_vpc.main.id
 
   # my node app replies HTTP "200" on /health path
   health_check {
