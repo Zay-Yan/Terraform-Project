@@ -248,7 +248,9 @@ data "aws_eks_cluster" "eks_cluster_info" {
 module "eks_blueprints_addons" {
   source = "aws-ia/eks-blueprints-addons/aws"
   version = "~> 1.0" #ensure to update this to the latest/desired version
-
+  providers {
+     helm = helm_provider
+  }
 
   cluster_name      = aws_eks_cluster.eks-cluster.name
   
@@ -265,9 +267,7 @@ module "eks_blueprints_addons" {
     coredns = {
       most_recent = true
     }
-    providers {
-     helm = helm_provider
-  }
+    
 }
   
   
