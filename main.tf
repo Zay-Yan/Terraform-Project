@@ -276,7 +276,7 @@ resource "aws_lb" "eks-alb" {
   security_groups    = [aws_security_group.eks-alb-sg.id]
   subnets            = aws_subnet.public-subnet[*].id
   enable_deletion_protection = false
-  depends_on = [var.vpc-igw]
+  depends_on = [aws_internet_gateway.internet-gateway.id]
 }
 
 # Create target group
