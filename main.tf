@@ -23,7 +23,7 @@ resource "aws_subnet" "private-subnet" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.private_subnet_cidr_blocks[count.index]
   availability_zone       = element(["ap-southeast-1a","ap-southeast-1b"], count.index)
-  map_public_ip_on_launch = false
+  map_public_ip_on_launch = true
   tags = {
     Name = "Private-Subnet-${count.index + 1}"
   }
