@@ -14,7 +14,7 @@ resource "aws_subnet" "public-subnet" {
   availability_zone       = element(["ap-southeast-1a","ap-southeast-1b"], count.index)
   map_public_ip_on_launch = true
   tags = {
-    Name = "Public-Subnet-${count.index + 1}"
+    kubernetes.io/role/elb = "1"
   }
 }
 resource "aws_subnet" "private-subnet" {
@@ -25,7 +25,7 @@ resource "aws_subnet" "private-subnet" {
   availability_zone       = element(["ap-southeast-1a","ap-southeast-1b"], count.index)
   map_public_ip_on_launch = true
   tags = {
-    Name = "Private-Subnet-${count.index + 1}"
+    kubernetes.io/role/elb = "1"
   }
 }
 resource "aws_internet_gateway" "internet-gateway" {
