@@ -50,6 +50,10 @@ resource "aws_route_table" "public-rtb" {
 }
 resource "aws_route_table" "private-rtb" {
   vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.internet-gateway.id
+  }
 
   tags = {
     Name = "apache_public_rtb"
