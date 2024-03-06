@@ -285,7 +285,7 @@ resource "aws_lb_target_group" "lab-alb-tg" {
   name        = "lab-target-group"
   port        = 80
   protocol    = "HTTP"
-  target_type = "ip"  // instance 
+  target_type = "instance"  // instance 
   vpc_id      = aws_vpc.main.id
 
   # my node app replies HTTP "200" on /health path
@@ -302,8 +302,13 @@ resource "aws_lb_target_group" "lab-alb-tg" {
     
   }
 }
-
-
+data "aws_autoscaling_group" "foo" {
+  name = "eks-EKS_NG-14c70948-f8a9-8f05-2c28-bacc6f709ba7"
+}
+resource "aws_autoscaling_attachment" "example" {
+  autoscaling_group_name = aws_autoscaling_group.example.foo.id
+  lb_target_group_arn    = aws_lb_target_group.lab-alb-tg.arn
+}
 # Create listener for alb on port 80
 resource "aws_lb_listener" "lab-alb-lsnr" {
   load_balancer_arn = aws_lb.eks-alb.arn
