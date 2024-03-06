@@ -265,7 +265,10 @@ module "eks_blueprints_addons" {
     coredns = {
       most_recent = true
     }
-  
+    providers {
+     helm = helm_provider
+  }
+}
   
   
     vpc-cni = {
